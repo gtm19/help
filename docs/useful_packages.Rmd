@@ -1,0 +1,103 @@
+---
+title: "Useful Packages"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+options(tibble.print_min = 5, tibble.print_max = 5, max.print = 100L)
+```
+
+## R Packages
+
+R comes bundled with so-called "base" packages, such as `tools::` and `utils::`. However, there are heaps of packages which are so widely used that they are considered _de facto_ base packages.
+
+As standard, most of my scripts start as follows:
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(readxl)
+library(here)
+```
+
+If you want to install all of these packages, use the following code:
+
+```{r, eval=FALSE}
+install.packages(
+  c(
+    "tidyverse",
+    "lubridate",
+    "janitor",
+    "readxl",
+    "here",
+  )
+)
+
+```
+
+### `tidyverse`
+
+The `tidyverse` is a so-called "meta-package", which actually installs a handful of useful packages such as `tidyr`, `readr`, and `dplyr`. 
+
+To highlight one, `dplyr` is used for wrangling data frames (which the `tidyverse` calls "tibbles"). It can be used to filter rows, add columns, and aggregate data frames:
+
+#### Filtering
+
+```{r}
+mtcars %>% 
+  filter(cyl >= 8)
+```
+
+#### Adding Columns
+
+```{r}
+mtcars %>% 
+  mutate(wt_kg = wt * 1000)
+```
+
+#### Summarising / Aggregating
+
+```{r}
+mtcars %>% 
+  group_by(cyl) %>% 
+  summarise(mean_hp = mean(hp))
+```
+
+The [`dplyr` cheat sheet is very useful](https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+
+### `lubridate`
+
+This is a package with nice functions for working with dates. Some notable ones are `day()`, `month()`, `year()`, which extract parts of the date; as well as `dmy()` (and similar), which coerce text into a date:
+
+```{r}
+today <- Sys.Date()
+
+year(today)
+month(today)
+day(today)
+
+dmy("20 Feb 2020")
+
+```
+
+### The Others
+
+`janitor` provides some functions which tidy up data frames, `readxl` is for working with spreadsheets, and `here` is a simple way to get full file paths for local files.
+
+If you want to learn more about them, either find them on GitHub and consult their README files, or run (for example) the following code to get a list of the vignettes associated with a package.
+
+```{r, eval = FALSE}
+vignette(package = "janitor")
+```
+
+Then you can open a specific vignette as follows:
+
+```{r, eval = FALSE}
+vignette("janitor")
+```
+
+### Learning
+
+Probably the best place to learn more about the `tidyverse` and other useful packages is by reading the book [R For Data Science](https://r4ds.had.co.nz/), and by consulting the [cheatsheets](https://rstudio.com/resources/cheatsheets/) on RStudio's website.

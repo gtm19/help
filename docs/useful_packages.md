@@ -33,8 +33,9 @@ install.packages(
 
 ### `tidyverse`
 
-The `tidyverse` is a so-called “meta-package”, which actually installs a
-handful of useful packages such as `tidyr`, `readr`, and `dplyr`.
+The [`tidyverse`](https://www.tidyverse.org/packages/) is a so-called
+“meta-package”, which actually installs a handful of useful packages
+such as `ggplot2`, `tidyr`, `readr`, and `dplyr`.
 
 To highlight one, `dplyr` is used for wrangling data frames (which the
 `tidyverse` calls “tibbles”). It can be used to filter rows, add
